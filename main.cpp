@@ -43,7 +43,7 @@ int main() {
   cout << "a valid move. The board is:" << '\n';
   display_board(board);
 
-	// write more tests
+  // write more tests
 
   cout << "=================== Question 3 ===================" << "\n\n";
 
@@ -72,11 +72,11 @@ int main() {
     cout << "A solution cannot be found." << '\n';
   cout << '\n';
 
-	// write more tests
+  // write more tests
 
   cout << "=================== Question 5 ===================" << "\n\n";
 
-	// write more tests
+  // write more tests
 
   return 0;
 }
