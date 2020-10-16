@@ -16,8 +16,9 @@ void load_board(const char* filename, char board[9][9]) {
   cout << "Loading Sudoku board from file '" << filename << "'... ";
 
   ifstream in(filename);
-  if (!in)
+  if (!in) {
     cout << "Failed!" << '\n';
+  }
   assert(in);
 
   char buffer[512];
@@ -39,10 +40,11 @@ void load_board(const char* filename, char board[9][9]) {
 
 /* internal helper function */
 void print_frame(int row) {
-  if (!(row % 3))
+  if (!(row % 3)) {
     cout << "  +===========+===========+===========+" << '\n';
-  else
+  } else {
     cout << "  +---+---+---+---+---+---+---+---+---+" << '\n';
+  }
 }
 
 /* internal helper function */
@@ -58,8 +60,9 @@ void print_row(const char* data, int row) {
 /* pre-supplied function to display a Sudoku board */
 void display_board(const char board[9][9]) {
   cout << "    ";
-  for (int r=0; r<9; r++) 
+  for (int r=0; r<9; r++) {
     cout << (char) ('1'+r) << "   ";
+  }
   cout << '\n';
   for (int r=0; r<9; r++) {
     print_frame(r);
