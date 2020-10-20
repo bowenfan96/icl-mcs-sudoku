@@ -33,7 +33,7 @@ int main() {
     cout << "NOT ";
   }
   cout << "complete." << "\n\n";
-
+  
   cout << "=================== Question 2 ===================" << "\n\n";
 
   load_board("easy.dat", board);
@@ -57,7 +57,7 @@ int main() {
     cout << "Save board failed." << '\n';
   }
   cout << '\n';
-
+  
   cout << "=================== Question 4 ===================" << "\n\n";
 
   load_board("easy.dat", board);
@@ -83,6 +83,6 @@ int main() {
   cout << "=================== Question 5 ===================" << "\n\n";
 
   // write more tests
-
+  
   return 0;
 }
