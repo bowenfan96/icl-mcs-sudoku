@@ -1,0 +1,4 @@
+g++ -g -c -o sudoku.o sudoku.cpp
+g++ -g -c -o main.o main.cpp
+g++ -g -o sudoku sudoku.o main.o
+./sudoku

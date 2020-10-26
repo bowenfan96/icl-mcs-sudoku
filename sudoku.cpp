@@ -5,6 +5,8 @@
 #include <cassert>
 #include "sudoku.h"
 
+#include "unistd.h"
+
 using namespace std;
 
 /* You are pre-supplied with the functions below. Add your own 
@@ -137,7 +139,6 @@ bool make_move(const char position[2], const int digit, char board[9][9]) {
 bool save_board(const char* filename, char board[9][9]) {
     ofstream file;
     file.open (filename, ios::out);
-    
     if (file.is_open()) {
         for (int row=0; row<9; row++) {
             for (int col=0; col<9; col++) {
@@ -156,36 +157,17 @@ bool save_board(const char* filename, char board[9][9]) {
 
 /* QUESTION 4 */
 
-bool solve_board(char board[9][9]) {
-    for (int row=0; row<9; row++) {
-        for (int col=0; col<9; col++) {
-            if (board[row][col] == '.') {
-                for (int digit=1; digit<10; digit++) {
-                    if (valid_move(row, col, digit, board)) {
-                        board[row][col] = digit;
-                        solve_board(board);
-                        board[row][col] = '.';
-                    }
-                }
-                return true;
-            }
-        }
-    }
-    return true;
-}
-                
-                
 /* Validity checker */
 
-bool valid_move(const int row, const int col, const int digit, char board[9][9]) {
+bool valid_move(int row, int col, const char digit, char board[9][9]) {
     for (int row_iter=0; row_iter<9; row_iter++) {
-        if (digit == board[row_iter][col]) {
+        if (digit + '0'  == board[row_iter][col]) {
             return false;
         }
     }
         
     for (int col_iter=0; col_iter<9; col_iter++) {
-        if (digit == board[row][col_iter]) {
+        if (digit + '0' == board[row][col_iter]) {
             return false;
         }
     }
@@ -195,10 +177,44 @@ bool valid_move(const int row, const int col, const int digit, char board[9][9])
     
     for (int row_iter=0; row_iter<3; row_iter++) {
         for (int col_iter=0; col_iter<3; col_iter++) {
-            if (digit == board[subgrid_row + row_iter][subgrid_col + col_iter]) {
+            if (digit + '0' == board[subgrid_row + row_iter][subgrid_col + col_iter]) {
                 return false;
             }
         }
     }
     return true;
+}
+
+bool solve_board(char board[9][9], int *stack) {
+    
+    *stack = *stack + 1;
+        
+    for (int row=0; row<9; row++) {
+        for (int col=0; col<9; col++) {
+            
+            if (board[row][col] == '.') {
+                                
+                for (int digit=1; digit<10; digit++) {
+                    if (valid_move(row, col, digit, board)) {
+                        
+                        board[row][col] = digit + '0';
+                        
+                        solve_board(board, stack);
+                        
+                        if (!is_complete(board)) {
+                            board[row][col] = '.';
+                        }
+                    }
+                }
+                
+                if (is_complete(board)) {
+                    
+                    return true;
+                }
+                return false;
+            }
+        }
+    }
+    return true;
+    
 }
