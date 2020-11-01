@@ -1,1 +1,29 @@
 Summarise your findings here (see specification).
+
+My program uses a backtracking algorithm, which attempts to solve the puzzle by moving across the cells from A1 to A9, then B1 to B9, and so forth. It also tries to place the smallest digit (1) first, then moves on to larger digits.
+
+The number of stack frames (the recursion depth) generated was tracked, and
+the time required to solve each puzzle was measured using the high_resolution_clock from the chrono library.
+
+These are the results:
+
+Easy - 2.165 milliseconds, 2172 stack frames
+Medium - 12.12 milliseconds, 15662 stack frames
+mystery1 - 324.2 milliseconds, 421547 stack frames
+mystery2 - No solutions found
+mystery3 - 8.570 milliseconds, 25667 stack frames
+
+Thus, based on how difficult the puzzle is for my backtracking algorithm to solve, we can establish that:
+- the mystery3 puzzle is "hard"
+- the mystery1 puzzle is "extremely hard"
+- the mystery2 puzzle is impossible to solve
+
+This is because the mystery1 puzzle required a much greater recursion depth than the mystery3 puzzle, which itself required a greater recursion depth than the medium puzzle. Curiously, the mystery3 puzzle required slightly less time to solve than the medium puzzle (consistent across several measurements), despite the greater recursion depth needed.
+
+However, it is worth discussing 2 points - firstly, these findings are specific to my backtracking algorithm - A1 to A9, B1 to B9, etc, and trying smaller digits first. These iteration sequences are arbitrary. A similar algorithm, but which iterates in the reverse order, may find different difficulty rankings; these findings would be just as valid.
+
+Secondly, this measure of difficulty, i.e. how difficult a puzzle is for a backtracking algorithm to solve, is not the commonly used standard of difficulty for Sudoku puzzles. The typically used difficulty standard pertains to the techniques required for a human to solve a puzzle.
+
+For example, easy puzzles contain cells that can be solved by a "single candidate", meaning that there is only one valid move in that cell. More difficult puzzles require the use of techniques known as "X-wing" and "Y-wing".
+
+I have to admit here that I have never solved a Sudoku puzzle by hand before, and so will not be able to comment on the difficult levels of the mystery puzzles based on the typically used standard.
